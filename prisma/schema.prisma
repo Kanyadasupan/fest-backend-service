@@ -1,0 +1,34 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// create schema เพื่อแมปกับตารางใน DB ที่จะทำงานด้วย
+model user_tb {
+  userId       Int    @id @default(autoincrement())
+  userFullname String @db.VarChar(100)
+  userName     String @db.VarChar(50)
+  userPassword String @db.VarChar(50)
+  userImage    String @db.VarChar(100)
+}
+
+model fest_tb {
+  festId     Int    @id @default(autoincrement())
+  festName   String @db.VarChar(150)
+  festDetial String
+  festState  String
+  festNumdate Int
+  festCost   Float
+  userId     Int
+  festImage  String @db.VarChar(150)
+}
